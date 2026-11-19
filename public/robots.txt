@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /bag
+Disallow: /checkout
+Disallow: /order-placed
+
+Sitemap: https://plantqi.com/sitemap.xml

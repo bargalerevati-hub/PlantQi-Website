@@ -1,0 +1,79 @@
+:root {
+  --paper: #fbf6e6;
+  --surface: #fffcf2;
+  --ink: #2a2927;
+  --muted: #5f5b50;
+  --line: rgba(42, 41, 39, 0.13);
+  --dot: rgba(122, 92, 0, 0.17);
+  --green: #f5d33f; /* primary action colour (canary) */
+  --green-hover: #edc72a;
+  --on-green: #2a2927;
+  --accent: #7a5c00;
+  --canary-soft: #fdf1b4;
+  --gold-line: #c9a227;
+  --bug: #c8402f;
+  --pen: #2f4a7a;
+  --warn: #a23a2a;
+  --c-wild-bg: #e3eeda;
+  --c-made-bg: #dceaf4;
+  --c-steps-bg: #f6ebc8;
+
+  --font-ui: "Zen Kaku Gothic New", "Helvetica Neue", Arial, sans-serif;
+  --font-mincho: "Shippori Mincho", "Hiragino Mincho ProN", "Yu Mincho", Georgia, serif;
+  --font-hand: "Caveat", "Bradley Hand", "Segoe Print", cursive;
+
+  --step--1: 0.9375rem;
+  --step-0: 1.0625rem;
+  --step-1: 1.1875rem;
+  --step-2: 1.625rem;
+  --step-3: clamp(2rem, 1.5rem + 2.4vw, 3.3rem);
+  --gap: clamp(24px, 4vw, 48px);
+  --section: clamp(56px, 8vw, 104px);
+  --dot-grid: radial-gradient(circle, var(--dot) 1px, transparent 1.3px);
+
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #1c1a14;
+    --surface: #24211a;
+    --ink: #f1ecdd;
+    --muted: #b5af9c;
+    --line: rgba(241, 236, 221, 0.14);
+    --dot: rgba(245, 211, 63, 0.16);
+    --green: #f5d33f;
+    --green-hover: #ffe066;
+    --on-green: #1c1a14;
+    --accent: #f5d33f;
+    --canary-soft: #2e2a1a;
+    --bug: #e0624f;
+    --pen: #9db4e0;
+    --warn: #f08a78;
+    --c-wild-bg: #26331f;
+    --c-made-bg: #1e2c38;
+    --c-steps-bg: #362c12;
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --paper: #1c1a14;
+  --surface: #24211a;
+  --ink: #f1ecdd;
+  --muted: #b5af9c;
+  --line: rgba(241, 236, 221, 0.14);
+  --dot: rgba(245, 211, 63, 0.16);
+  --green: #f5d33f;
+  --green-hover: #ffe066;
+  --on-green: #1c1a14;
+  --accent: #f5d33f;
+  --canary-soft: #2e2a1a;
+  --bug: #e0624f;
+  --pen: #9db4e0;
+  --warn: #f08a78;
+  --c-wild-bg: #26331f;
+  --c-made-bg: #1e2c38;
+  --c-steps-bg: #362c12;
+  color-scheme: dark;
+}
