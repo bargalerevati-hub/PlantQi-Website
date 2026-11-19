@@ -12,7 +12,7 @@ export default [
       globals: { ...globals.browser },
     },
     rules: {
-      "no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
+      "no-unused-vars": ["error", { argsIgnorePattern: "^_", varsIgnorePattern: "^_" }],
     },
   },
   {
