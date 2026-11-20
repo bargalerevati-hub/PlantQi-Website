@@ -36,7 +36,9 @@ export function createRouter({ routes, aliases = {}, notFound, outlet, onRender 
     }
   }
 
-  function show(path, { scrollTo } = {}) {
+  // `historyOp` ("pushState" / "replaceState") runs after the new page and its title are in place,
+  // so analytics tools that record page views on URL changes see the right title.
+  function show(path, { scrollTo, historyOp } = {}) {
     const alias = aliases[normalise(path)];
     if (alias) {
       history.replaceState(null, "", alias + location.search + location.hash);
@@ -46,6 +48,7 @@ export function createRouter({ routes, aliases = {}, notFound, outlet, onRender 
     const same = lastPath === normalise(path);
     lastPath = normalise(path);
     const after = () => {
+      if (historyOp) history[historyOp](null, "", path);
       if (scrollTo) {
         const el = document.getElementById(scrollTo);
         if (el) el.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
@@ -70,9 +73,7 @@ export function createRouter({ routes, aliases = {}, notFound, outlet, onRender 
       window.scrollTo(0, 0);
       return;
     }
-    if (opts.replace) history.replaceState(null, "", path);
-    else history.pushState(null, "", path);
-    show(path, opts);
+    show(path, { ...opts, historyOp: opts.replace ? "replaceState" : "pushState" });
   }
 
   function start() {
