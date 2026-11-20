@@ -1,4 +1,8 @@
 /**
+ * @OnlyCurrentDoc  Limits access to this one spreadsheet, not all of your Google Sheets.
+ */
+
+/**
  * Plant Qi orders sheet: receives orders and contact messages from the website's /api functions,
  * adds each one as a row, and emails a notification.
  *
