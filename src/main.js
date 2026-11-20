@@ -1,66 +1,36 @@
 import { setupBuybar } from "./components/buybar.js";
 import { addSwipeHints } from "./components/ui.js";
-import { PRODUCTS } from "./data/catalog.js";
 import { cart } from "./lib/cart.js";
 import { createRouter } from "./lib/router.js";
-import { pageBag } from "./pages/bag.js";
-import { pageCheckout } from "./pages/checkout.js";
-import { pageContact } from "./pages/contact.js";
-import { pageHelp } from "./pages/help.js";
-import { pageHome } from "./pages/home.js";
-import { pageNotFound } from "./pages/not-found.js";
-import { pageOrderPlaced } from "./pages/order-placed.js";
-import { pageProduct } from "./pages/product.js";
-import { pageShop } from "./pages/shop.js";
-import { pageStory } from "./pages/story.js";
+import { notFound, routes } from "./routes.js";
+import { DEFAULT_DESCRIPTION, canonical, pageTitle } from "./seo.js";
 
-const SITE = "Plant Qi";
-const ORIGIN = "https://plantqi.com";
-const DEFAULT_DESCRIPTION = "Small steps. Quiet growth. Calm, well-made journals by Plant Qi, made with care in India.";
-
-const product = (id) => ({
-  page: () => pageProduct(id),
-  title: PRODUCTS[id].name,
-  description: PRODUCTS[id].blurb,
-  nav: "shop",
-});
-
-const routes = {
-  "/": { page: pageHome, title: "Plant Qi · Journals for small, steady change" },
-  "/shop": { page: pageShop, title: "Journals", nav: "shop", description: "A calm, well-made journal for the year ahead." },
-  "/journal-2027": product("j27"),
-  "/journal-2026": product("j26"),
-  "/bag": { page: pageBag, title: "Your bag", nav: "bag" },
-  "/checkout": { page: pageCheckout, title: "Checkout", nav: "bag" },
-  "/order-placed": { page: pageOrderPlaced, title: "Order placed", nav: "bag" },
-  "/story": {
-    page: pageStory,
-    title: "Our story",
-    nav: "story",
-    description: "We started with one question: how little do we really need?",
-  },
-  "/contact": {
-    page: pageContact,
-    title: "Contact",
-    nav: "contact",
-    description: "Questions about an order, gifting or bulk journals? Write to Plant Qi.",
-  },
-  "/help": {
-    page: pageHelp,
-    title: "Orders, delivery and replacements",
-    description: "Payment, delivery across India and replacements for Plant Qi journals.",
-  },
-};
-
-// Older page names from the single-file site.
+// Older page names from the single-file site (also redirected by vercel.json).
 const aliases = { "/home": "/", "/journals": "/shop", "/about": "/story", "/about-contact": "/contact" };
 
-const notFound = { page: pageNotFound, title: "Page not found" };
-
 function setMeta(route, path) {
-  document.title = path === "/" ? route.title : `${route.title} · ${SITE}`;
+  document.title = pageTitle(route, path);
   document.querySelector('meta[name="description"]').setAttribute("content", route.description || DEFAULT_DESCRIPTION);
-  document.querySelector('link[rel="canonical"]').setAttribute("href", ORIGIN + (path === "/" ? "/" : path));
+
+  let link = document.querySelector('link[rel="canonical"]');
+  let robots = document.querySelector('meta[name="robots"]');
+  if (route.noindex) {
+    link?.remove();
+    if (!robots) {
+      robots = document.createElement("meta");
+      robots.name = "robots";
+      robots.content = "noindex";
+      document.head.append(robots);
+    }
+  } else {
+    robots?.remove();
+    if (!link) {
+      link = document.createElement("link");
+      link.rel = "canonical";
+      document.head.append(link);
+    }
+    link.href = canonical(path);
+  }
 }
 
 const outlet = document.getElementById("app");

@@ -15,7 +15,7 @@ export function pageHome() {
   const p = PRODUCTS.j27;
   return `
   <section class="q-hero"><div class="wrap"><div class="wrap sheet dots hero-sheet">
-    <div class="stack gap-24"><p class="label">The 2027 journal</p><h1>Your year, in your own words.</h1>
+    <div class="stack gap-24"><p class="label">The 2027 daily journal</p><h1>Your year, in your own words.</h1>
       <p class="lead">Messy or neat, one word or a whole page. No matter how imperfect it is, it's blossoming.</p>
       <div class="actions"><a class="btn" href="/journal-2027">Order · ${rupee(p.price)}</a><a class="btn btn--quiet" href="/journal-2027">See inside</a></div>
       <p class="gift-hint">${GIFT_LINE}</p></div>

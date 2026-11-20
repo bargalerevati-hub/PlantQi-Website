@@ -69,7 +69,7 @@ export function pageProduct(id) {
 
   const html = `<div class="wrap"><nav class="crumbs" aria-label="Breadcrumb"><a href="/shop">Journals</a> / ${esc(p.short)}</nav>
     <div class="pdp"><div class="gallery">${main}${thumbs}</div>
-      <div class="buy"><div class="stack gap-10"><p class="label">${p.edition} edition</p><h1 class="pdp-title">${esc(p.name)}</h1></div>${buyPanel(id, p)}</div></div>
+      <div class="buy"><div class="stack gap-10"><p class="label">${p.edition} daily journal</p><h1 class="pdp-title">${esc(p.name)}</h1></div>${buyPanel(id, p)}</div></div>
     ${extraSections(id)}</div>`;
 
   return {

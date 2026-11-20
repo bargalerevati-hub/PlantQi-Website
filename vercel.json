@@ -4,7 +4,21 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "trailingSlash": false,
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }],
+  "redirects": [
+    { "source": "/home", "destination": "/", "permanent": true },
+    { "source": "/journals", "destination": "/shop", "permanent": true },
+    { "source": "/about", "destination": "/story", "permanent": true },
+    { "source": "/about-contact", "destination": "/contact", "permanent": true }
+  ],
+  "rewrites": [
+    { "source": "/shop", "destination": "/pages/shop.html" },
+    { "source": "/journal-2027", "destination": "/pages/journal-2027.html" },
+    { "source": "/journal-2026", "destination": "/pages/journal-2026.html" },
+    { "source": "/story", "destination": "/pages/story.html" },
+    { "source": "/contact", "destination": "/pages/contact.html" },
+    { "source": "/help", "destination": "/pages/help.html" },
+    { "source": "/(.*)", "destination": "/app.html" }
+  ],
   "headers": [
     {
       "source": "/assets/(.*)",

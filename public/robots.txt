@@ -3,5 +3,6 @@ Allow: /
 Disallow: /bag
 Disallow: /checkout
 Disallow: /order-placed
+Disallow: /api/
 
-Sitemap: https://plantqi.com/sitemap.xml
+Sitemap: https://www.plantqi.com/sitemap.xml
