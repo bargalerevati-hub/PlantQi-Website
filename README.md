@@ -6,7 +6,7 @@ Built with plain JavaScript (ES modules) and [Vite](https://vitejs.dev). No fram
 
 ## Getting started
 
-Requires Node.js 18.18+ (see `.nvmrc`).
+Requires Node.js 22 (see `.nvmrc`).
 
 ```bash
 npm install
