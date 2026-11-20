@@ -1,13 +1,14 @@
 import { CONFIG, INSTAGRAM_URL } from "../config.js";
 import { firstName } from "../lib/format.js";
-import { isIndianMobile, sendForm, showErrors } from "../lib/forms.js";
+import { HONEYPOT, postForm, showErrors } from "../lib/forms.js";
+import { checkMessage } from "../lib/validate.js";
 
 export function pageContact() {
   const html = `<div class="wrap"><div class="page-head"><p class="label">Contact</p><h1>Say hello</h1>
       <p>Questions about an order, gifting or bulk journals? Write to us and we will get back to you within a day.</p>
       <p>Email <span class="select-all">${CONFIG.email}</span></p></div>
     <section class="section-pad"><div class="contact-wrap">
-      <form id="contact-form" class="form-grid" novalidate>
+      <form id="contact-form" class="form-grid" novalidate>${HONEYPOT}
         <div class="field"><label for="c-name">Your name</label><input id="c-name" name="c-name" type="text" autocomplete="name" required><span class="err" id="c-name-err"></span></div>
         <div class="field"><label for="c-phone">Mobile number</label><input id="c-phone" name="c-phone" type="tel" inputmode="numeric" autocomplete="tel" placeholder="10-digit number" required><span class="err" id="c-phone-err"></span></div>
         <div class="field full"><label for="c-msg">Message</label><textarea id="c-msg" name="c-msg" rows="5" placeholder="A question, an order, a gifting or bulk request…" required></textarea><span class="err" id="c-msg-err"></span></div>
@@ -39,27 +40,23 @@ export function pageContact() {
         const v = {
           name: form.elements["c-name"].value.trim(),
           phone: form.elements["c-phone"].value.trim(),
-          msg: form.elements["c-msg"].value.trim(),
+          message: form.elements["c-msg"].value.trim(),
         };
-        const ok = showErrors({
-          "c-name": v.name.length < 2 ? "Please enter your name." : "",
-          "c-phone": !isIndianMobile(v.phone) ? "Enter a 10-digit Indian mobile number." : "",
-          "c-msg": v.msg.length < 3 ? "Please write a short message." : "",
-        });
-        if (!ok) return;
+        if (!showErrors(checkMessage(v))) return;
         btn.disabled = true;
         btn.textContent = "Sending…";
         err.textContent = "";
         try {
-          const how = await sendForm("contact", { name: v.name, phone: v.phone, message: v.msg });
+          const res = await postForm("/api/contact", { ...v, company: form.elements.company.value });
           document.getElementById("contact-done-title").textContent = `Thank you, ${firstName(v.name)}.`;
-          if (how === "preview") {
+          if (res.preview) {
             document.getElementById("contact-done-text").textContent =
-              `Preview only: once the site's form key is set, this message is sent to ${CONFIG.email}.`;
+              "Preview only: local development has no API, so this message was not sent.";
           }
           form.hidden = true;
           done.hidden = false;
-        } catch {
+        } catch (e) {
+          if (e.errors) showErrors(e.errors);
           err.textContent = `Your message could not be sent. Please try again, or email ${CONFIG.email}.`;
         }
         reset();

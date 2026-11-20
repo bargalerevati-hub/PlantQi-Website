@@ -19,6 +19,9 @@ npm run lint
 ## Project structure
 
 ```
+api/                    Vercel functions: /api/order and /api/contact
+google-apps-script/     Script that runs inside the orders Google Sheet
+docs/                   Setup guides
 index.html              Page shell: SEO meta, header, footer, SVG sprite
 public/                 Static files served as-is (images, favicon, robots.txt, sitemap.xml)
 src/
@@ -36,13 +39,11 @@ Pages use clean URLs (`/shop`, `/journal-2027`, `/bag`, `/checkout`, `/story`, `
 
 ## Orders and contact form
 
-No payment is taken on the site. Orders and messages are emailed to hello@plantqi.com through [Web3Forms](https://web3forms.com).
+No payment is taken on the site. Checkout posts to `/api/order`, a Vercel function that rechecks the details, prices the order from the catalogue, and saves it as a row in a Google Sheet (with an email to hello@plantqi.com). Contact messages go through `/api/contact` to the same sheet.
 
-1. Get a free access key at web3forms.com, sent to hello@plantqi.com.
-2. In Vercel, open **Project → Settings → Environment Variables** and add `VITE_WEB3FORMS_KEY`.
-3. Redeploy.
+**Setup:** follow [docs/ORDERS_SETUP.md](docs/ORDERS_SETUP.md). You'll need two Vercel environment variables, `SHEET_WEBHOOK_URL` and `SHEET_SECRET`.
 
-Until a key is set (and always on `localhost`), the site runs in **preview mode**: forms work, but nothing is sent, and the confirmation says so. See `.env.example` for the optional Google Sheet backend.
+`npm run dev` has no API, so forms run in preview mode locally and nothing is saved.
 
 ## Deployment
 

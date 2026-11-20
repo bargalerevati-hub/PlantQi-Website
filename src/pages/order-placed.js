@@ -18,7 +18,7 @@ export function pageOrderPlaced() {
 
   return `<div class="wrap"><div class="confirm"><p class="label">Order placed</p><h1>Thank you, ${esc(firstName(c.name))}.</h1>
     <p>Your order number is <span class="order-id">${esc(o.id)}</span></p>
-    ${o.preview ? `<p class="muted small preview-note">Preview only: once the site's form key is set, this order is sent to ${CONFIG.email}.</p>` : ""}
+    ${o.preview ? `<p class="muted small preview-note">Preview only: local development has no API, so this order was not saved.</p>` : ""}
     ${stepsHTML(2)}
     <ol class="next-steps">
       <li><span>We have your order. We will confirm it on WhatsApp at ${esc(c.phone)} within a day.</span></li>
