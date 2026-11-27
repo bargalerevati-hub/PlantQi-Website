@@ -17,7 +17,7 @@ export const PRODUCTS = {
     edition: "2027",
     name: "The Quiet Growth We Overlook 2027",
     short: "2027 journal",
-    price: 999,
+    price: 699,
     status: "preorder",
     blurb:
       "Open pages and very few prompts, so you write your own mind. Plan each month, tick your habits on Sundays, look back and rate your month on the 29th.",

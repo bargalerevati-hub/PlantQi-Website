@@ -8,7 +8,7 @@ export const ORIGIN = "https://www.plantqi.com";
 export const SITE = "Plant Qi";
 export const DEFAULT_TITLE = "Plant Qi · 2027 Daily Journal, A5 Hardcover · Made in India";
 export const DEFAULT_DESCRIPTION =
-  "Plant Qi makes calm, well-made daily journals in India. The 2027 A5 hardcover journal has open daily pages, monthly plans and habit trackers. ₹999 with free delivery across India.";
+  "Plant Qi makes calm, well-made daily journals in India. The 2027 A5 hardcover journal has open daily pages, monthly plans and habit trackers. ₹699 with free delivery across India.";
 const DEFAULT_IMAGE = "/images/cover27.webp";
 
 export const pageTitle = (route, path) => (path === "/" ? route.title : `${route.title} · ${SITE}`);

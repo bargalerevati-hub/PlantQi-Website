@@ -28,7 +28,7 @@ export const routes = {
     page: pageHome,
     title: "Plant Qi · 2027 Daily Journal, A5 Hardcover · Made in India",
     description:
-      "A calm 2027 daily journal: A5 hardcover, cream paper, open daily pages, monthly plans and habit trackers. Made in India by Plant Qi. ₹999 with free delivery.",
+      "A calm 2027 daily journal: A5 hardcover, cream paper, open daily pages, monthly plans and habit trackers. Made in India by Plant Qi. ₹699 with free delivery.",
     prerender: true,
     schema: () => [organizationSchema(), websiteSchema()],
   },
@@ -42,8 +42,8 @@ export const routes = {
   },
   "/journal-2027": product(
     "j27",
-    "2027 Daily Journal, A5 Hardcover · ₹999",
-    "The Quiet Growth We Overlook 2027: an A5 hardcover daily journal with 224 cream pages, two days a page, mood faces, monthly plans and a Sunday habit tracker. ₹999, free delivery in India.",
+    "2027 Daily Journal, A5 Hardcover · ₹699",
+    "The Quiet Growth We Overlook 2027: an A5 hardcover daily journal with 224 cream pages, two days a page, mood faces, monthly plans and a Sunday habit tracker. ₹699, free delivery in India.",
   ),
   "/journal-2026": product(
     "j26",
